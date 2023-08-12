@@ -1,8 +1,9 @@
 import express from "express"
-import mongoose from "mongoose"
 import userRouter from "./routes/user.js"
+import taskrouter from "./routes/task.js"
 import { connectDB } from "./database/database.js"
 import {config} from "dotenv"
+import cookieParser from "cookie-parser"
 
 config({
     path : "./database/config.env"
@@ -10,10 +11,15 @@ config({
 const app = express()
 
 connectDB();
+
 // Using Middlewares
 
 app.use(express.json()); 
+app.use(cookieParser());
+
+//Using routes
 app.use(userRouter);
+app.use("/task" , taskrouter);
 
 
 app.get("/" , (req,res) => {

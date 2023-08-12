@@ -1,16 +1,17 @@
 import express from "express";
-import { user } from "../models/user.js"; 
-import { DeleteUser, UpdateUser, addNewUser, getAllUsers, getUserId } from "../controllers/user.js";
+import { getAllUsers, getMyDetails , login,logout , register } from "../controllers/user.js";
+import { isAuthenticated } from "../middlewares/auth.js";
+
+
 const router = express.Router();
 
-router.get("/users/all" , getAllUsers)
+router.get("/all" , getAllUsers)
 
-router.get("/usersid" , getUserId)
+router.get("/me" , isAuthenticated ,  getMyDetails)
 
-router.post("/users/new" , addNewUser)
+router.get("/logout" , logout)
 
-router.put("/users/update" , UpdateUser)
+router.post("/login" , login)
 
-router.delete("/users/delete" , DeleteUser)
-
+router.post("/new" , register)
 export default router

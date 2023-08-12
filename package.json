@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
-  "type" : "module",
+  "type": "module",
   "scripts": {
-    "start" : "node app.js",
-    "dev" : "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^7.4.1"
+  }
 }
