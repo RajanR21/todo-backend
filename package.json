@@ -1,0 +1,13 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type" : "module",
+  "scripts": {
+    "start" : "node app.js",
+    "dev" : "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
