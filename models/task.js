@@ -27,5 +27,5 @@ const schema = new mongoose.Schema({
     },
 })
 
-export const Task = mongoose.model("User", schema)
+export const Task = mongoose.model("Task", schema)
 

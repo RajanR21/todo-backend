@@ -4,6 +4,7 @@ import taskrouter from "./routes/task.js"
 import { connectDB } from "./database/database.js"
 import {config} from "dotenv"
 import cookieParser from "cookie-parser"
+import { errorMiddleware } from "./middlewares/error.js"
 
 config({
     path : "./database/config.env"
@@ -26,6 +27,8 @@ app.get("/" , (req,res) => {
     res.send("hiiii");
 })
 
+//using error middleware
+app.use(errorMiddleware)
 /*
 app.get("/users/all" , async(req,res) => {
     const users = await user.find({});
