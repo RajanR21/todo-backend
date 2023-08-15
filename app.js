@@ -5,6 +5,7 @@ import { connectDB } from "./database/database.js"
 import {config} from "dotenv"
 import cookieParser from "cookie-parser"
 import { errorMiddleware } from "./middlewares/error.js"
+import cors from "cors";
 
 config({
     path : "./database/config.env"
@@ -17,6 +18,12 @@ connectDB();
 
 app.use(express.json()); 
 app.use(cookieParser());
+app.use(cors({
+    origine : [process.env.FRONTEND_URL],
+    methods : ["GET" , "PUT" , "DELETE" , "POST"],
+    credentials : true,
+    //if credential is false then cookie will not reac to the frontend as header
+}));
 
 //Using routes
 app.use(userRouter);
@@ -27,46 +34,9 @@ app.get("/" , (req,res) => {
     res.send("hiiii");
 })
 
-//using error middleware
+//using error middleware 
 app.use(errorMiddleware)
-/*
-app.get("/users/all" , async(req,res) => {
-    const users = await user.find({});
-  
-    res.json({
-        success : true , 
-        users ,
-    })
 
-})
-
-app.get("/usersid" , async(req,res) => {
-    const id = req.body.id;
-    const users = await user.findById(id);
-  
-    res.json({
-        success : true , 
-        users,
-    })
-})
-
-app.post("/users/new" , async(req,res) => {
-    const {name , email , password} = req.body;
-
-    user.create({
-        name,
-        email,
-        password,
-    })
-
-    //we can send the code also as created(201) and can also send a cookie
-    res.status(201).cookie("tmp" , "lol").json({
-        success : true , 
-        message : "Registered Successfuly",
-    })
-})
-
-*/
-app.listen(5000 , () => {
-    console.log("working");
+app.listen(process.env.port , () => {
+    console.log(`Server is working on port : ${process.env.port} in ${process.env.NODE_ENV} mod`);
 })

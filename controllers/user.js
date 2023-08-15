@@ -74,7 +74,15 @@ export const logout = (req, res) => {
     //we have to just clear the cookie and make the token empty and
     //we will give the cookie expire time of now
     res.status(200)
-        .cookie("token", "", { expires: new Date(Date.now())})
+        .cookie("token", "", { 
+            expires: new Date(Date.now()),
+            sameSite : process.env.NODE_ENV === "Development" ? "lax" : "none",
+            //provided samesite and secure because 3 mods of cookiesending 
+            //lax is default mode  
+            //in strict mode cookie will not be send to any third party web request.
+            //hence provide it none mod hence cookie will be send to all the context
+            secure : process.env.NODE_ENV === "Development" ? false : true
+        })
         .json({
             success: true,
         })
